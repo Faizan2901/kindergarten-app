@@ -1,0 +1,49 @@
+<!-- Contact Section -->
+<div class="contact-section">
+    <h1>Contact Us 📬</h1>
+    <p>We’d love to hear from you! Whether you have questions or feedback, feel free to reach out to us anytime.</p>
+  
+    <div class="contact-container">
+      <!-- Contact Form -->
+      <form class="contact-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="contact.name" required placeholder="Your Full Name">
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" [(ngModel)]="contact.email" required placeholder="Your Email">
+        </div>
+  
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" [(ngModel)]="contact.message" required placeholder="Your Message" rows="6"></textarea>
+        </div>
+  
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+  
+      <!-- Contact Details -->
+      <div class="contact-details">
+        <h2>Our Location 📍</h2>
+        <p>Nanhe Munne Play Center,</p>
+        <p>123 Kid’s Street, Fun Town,</p>
+        <p>City Name, Country</p>
+  
+        <h3>Phone 📞</h3>
+        <p>+1 234 567 890</p>
+  
+        <h3>Email 📧</h3>
+        <p>info&#64;nanhemunne.com</p>
+  
+        <h3>Social Media 🌐</h3>
+        <p>
+          <a href="https://www.facebook.com/nanhemunne" target="_blank">Facebook</a> | 
+          <a href="https://twitter.com/nanhemunne" target="_blank">Twitter</a> | 
+          <a href="https://www.instagram.com/nanhemunne" target="_blank">Instagram</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  

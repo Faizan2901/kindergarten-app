@@ -1,0 +1,22 @@
+<div class="game-wrapper">
+    <h2>🧠 Memory Game</h2>
+  
+    <div class="theme-selector">
+      <button (click)="changeTheme('islamic')">🕌 Islamic</button>
+      <button (click)="changeTheme('animals')">🐾 Animals</button>
+      <button (click)="changeTheme('fruits')">🍉 Fruits</button>
+    </div>
+  
+    <div class="grid">
+      <div
+        class="card"
+        *ngFor="let card of cards"
+        (click)="flipCard(card)"
+        [class.flipped]="card.isFlipped || card.isMatched"
+      >
+        <div class="front">{{ card.icon }}</div>
+        <div class="back">❓</div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+/* 🎨 Global Background Style */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Sans MS", "Poppins", sans-serif;
+    background: linear-gradient(135deg, #fff8e1, #ffe0b2, #f8bbd0);
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #4e342e;
+  }
+  
+  /* 🎀 Smooth Transition Between Pages */
+  * {
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  /* 🌟 Add a bit of cuteness to headings */
+  h1, h2, h3 {
+    color: #6a1b9a;
+    text-shadow: 1px 1px #fff;
+  }
+  
+  /* 🍭 Optional: Scrollbar customization for fun */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ffd54f;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
