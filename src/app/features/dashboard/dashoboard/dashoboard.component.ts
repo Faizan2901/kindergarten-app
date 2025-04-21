@@ -11,26 +11,23 @@ import { RouterLink } from '@angular/router';
 })
 export class DashoboardComponent implements OnInit{
 
-  userService=inject(UserService);
+  userService = inject(UserService);
 
-  user:any=[];
-  userRole: string = '';
+  user: any = {};
+  userRole: string[] = [];
 
   ngOnInit(): void {
-   this.userService.getUserInfo().subscribe(
-    {
-      next:(res)=>{
-        this.user = res.user;
-        this.userRole = this.user.roles[0]?.name || '';
-        console.log(this.user);
-      },
-      error:(err)=>{
-        alert(err.error);
-      }
-    }
-   )
-  }
+    this.userService.getUserInfo().subscribe({
+      next: () => {}
+    });
 
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.user = user;
+        this.userRole = user.roles.map((role:any) => role.name);
+      }
+    });
+  }
   
 
 }

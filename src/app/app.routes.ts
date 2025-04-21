@@ -7,7 +7,12 @@ import { AboutComponent } from './features/about/about.component';
 import { ActivitiesComponent } from './features/activities/activities.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { MemoryGameComponent } from './features/memory-game/memory-game.component';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './guards/auth/auth.guard';
+import { ManagestudentComponent } from './students/managestudent/managestudent.component';
+import { roleGuard } from './guards/role/role.guard';
+import { ManageteacherComponent } from './teachers/manageteacher/manageteacher.component';
+import { AttendancesummaryComponent } from './teachers/attendancesummary/attendancesummary.component';
+import { AttendanceComponent } from './teachers/attendance/attendance.component';
 
 export const routes: Routes = [
     {
@@ -43,5 +48,26 @@ export const routes: Routes = [
     {
         path: 'contact',
         component: ContactComponent
+    },
+    {
+        path: 'manage-students',
+        component: ManagestudentComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
+    {
+        path: 'manage-teachers',
+        component: ManageteacherComponent,
+        canActivate: [roleGuard(['ADMIN'])]
+    },
+    {
+        path: 'attendance-summary',
+        component: AttendancesummaryComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
+    {
+        path: 'attendance',
+        component: AttendanceComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
     }
+
 ];

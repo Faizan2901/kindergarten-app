@@ -1,47 +1,57 @@
 <div class="dashboard-wrapper">
-    <div class="dashboard-header">
-      <h1>🎉 Welcome, {{user.firstName}}</h1>
-      <p class="sub-text">Empowering Little Minds Every Day</p>
-    </div>
-  
-    <div class="dashboard-cards">
-      <!-- Admin Cards -->
-      <div *ngIf="userRole === 'ADMIN'" class="dashboard-card">
+  <div class="dashboard-header">
+    <h1>🎉 Welcome, {{ user.firstName }}</h1>
+    <p class="sub-text">Empowering Little Minds Every Day</p>
+  </div>
+
+  <div class="dashboard-cards">
+    <!-- ADMIN & TEACHER View -->
+    <ng-container *ngIf="userRole.includes('ADMIN') || userRole.includes('TEACHER')">
+
+      <div class="dashboard-card">
+        <h3>📝 Attendance Menu</h3>
+        <p>Take daily student attendance.</p>
+        <a routerLink="/attendance">Take Attendance</a>
+      </div>
+
+      <div class="dashboard-card">
         <h3>📋 Attendance Overview</h3>
         <p>Monitor daily student attendance stats.</p>
         <a routerLink="/attendance-summary">View Details</a>
       </div>
-  
-      <div *ngIf="userRole === 'ADMIN'" class="dashboard-card">
+
+      <div class="dashboard-card">
         <h3>🧑‍🏫 Manage Teachers</h3>
         <p>Assign roles and monitor teacher activity.</p>
         <a routerLink="/manage-teachers">Manage Now</a>
       </div>
-  
-      <div *ngIf="userRole === 'ADMIN'" class="dashboard-card">
+
+      <div class="dashboard-card">
         <h3>👧 Student Records</h3>
         <p>View and update student information.</p>
         <a routerLink="/manage-students">Explore Students</a>
       </div>
-  
-      <!-- Student Cards -->
-      <div *ngIf="userRole === 'STUDENT'" class="dashboard-card">
+    </ng-container>
+
+    <!-- STUDENT View -->
+    <ng-container *ngIf="userRole.includes('STUDENT')">
+      <div class="dashboard-card">
         <h3>🗓️ My Attendance</h3>
         <p>See your attendance history.</p>
         <a routerLink="/my-attendance">Check Attendance</a>
       </div>
-  
-      <div *ngIf="userRole === 'STUDENT'" class="dashboard-card">
+
+      <div class="dashboard-card">
         <h3>🎨 Activities</h3>
         <p>Join the fun! Games, Art & more!</p>
         <a routerLink="/activities">Play Now</a>
       </div>
-  
-      <div *ngIf="userRole === 'STUDENT'" class="dashboard-card">
+
+      <div class="dashboard-card">
         <h3>📢 Announcements</h3>
         <p>Important updates and notices.</p>
         <a routerLink="/announcements">View Announcements</a>
       </div>
-    </div>
+    </ng-container>
   </div>
-  
+</div>
