@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MemoryGameComponent } from '../memory-game.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

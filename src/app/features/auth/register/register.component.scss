@@ -1,0 +1,116 @@
+.register-container {
+    max-width: 700px;
+    margin: 4rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    background: #fff3e0;
+    font-family: 'Comic Sans MS', cursive;
+  
+    h2 {
+      text-align: center;
+      color: #ff6f00;
+      margin-bottom: 2rem;
+    }
+  
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+  
+      label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+  
+      input {
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+    }
+  
+    .register-btn {
+      margin-top: 2rem;
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      background-color: #ffca28;
+      color: #4e342e;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background-color: #ffd54f;
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  .login-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #6d4c41;
+  
+    a {
+      color: #ff6f00;
+      font-weight: bold;
+      text-decoration: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
+  
+  .form-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  button.register-btn {
+    padding: 10px 20px;
+    background-color: #ff6f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  
+    &:disabled {
+      background-color: #d3d3d3;
+      cursor: not-allowed;
+    }
+  
+    &:hover {
+      background-color: #f57c00;
+    }
+  }
+  
+  

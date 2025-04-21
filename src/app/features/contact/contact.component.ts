@@ -19,8 +19,14 @@ export class ContactComponent {
 
   onSubmit() {
     // Handle the form submission, send it to a server, etc.
-    console.log(this.contact);
-    alert('Form submitted!');
+    if(!this.contact.name.trim() || !this.contact.email.trim() || !this.contact.message.trim()) 
+    {
+      alert("Please fill proper information.."); return;
+    }
+    else 
+    {
+      console.log(this.contact); alert('Form submitted!');
+    }
   }
   
 }

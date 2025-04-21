@@ -5,8 +5,9 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { DashoboardComponent } from './features/dashboard/dashoboard/dashoboard.component';
 import { AboutComponent } from './features/about/about.component';
 import { ActivitiesComponent } from './features/activities/activities.component';
-import { MemoryGameComponent } from './features/memory-game.component';
 import { ContactComponent } from './features/contact/contact.component';
+import { MemoryGameComponent } from './features/memory-game/memory-game.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -24,7 +25,8 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashoboardComponent
+        component: DashoboardComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'about',
