@@ -13,6 +13,7 @@ import { roleGuard } from './guards/role/role.guard';
 import { ManageteacherComponent } from './teachers/manageteacher/manageteacher.component';
 import { AttendancesummaryComponent } from './teachers/attendancesummary/attendancesummary.component';
 import { AttendanceComponent } from './teachers/attendance/attendance.component';
+import { AnnouncementsComponent } from './features/announcement/announcements/announcements.component';
 
 export const routes: Routes = [
     {
@@ -48,6 +49,10 @@ export const routes: Routes = [
     {
         path: 'contact',
         component: ContactComponent
+    },
+    {
+        path: 'announcements',
+        component: AnnouncementsComponent
     },
     {
         path: 'manage-students',

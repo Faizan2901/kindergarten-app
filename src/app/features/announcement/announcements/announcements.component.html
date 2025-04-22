@@ -1,0 +1,17 @@
+<div class="announcement-page">
+    <h1 class="announcement-title">📢 Announcements</h1>
+  
+    <div class="announcements-container">
+      <div class="announcement-card" *ngFor="let note of announcements">
+        <div class="icon">🎉</div>
+        <div class="content">
+          <h3>{{ note.title }}</h3>
+          <p>{{ note.description }}</p>
+          <small class="date">📅 {{ note.date | date: 'mediumDate' }}</small>
+        </div>
+      </div>
+    </div>
+  
+    <button class="add-btn" disabled title="Coming soon!">➕ Add Announcement</button>
+  </div>
+  
