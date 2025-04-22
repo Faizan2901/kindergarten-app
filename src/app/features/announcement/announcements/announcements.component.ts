@@ -35,12 +35,12 @@ export class AnnouncementsComponent {
     {
       title: 'Summer Break ☀️',
       description: 'The school will remain closed from May 1 to June 10 for summer holidays.',
-      date: new Date('2025-04-15')
+      date: new Date('2025-06-10')
     },
     {
-      title: 'Parent-Teacher Meeting 📚',
-      description: 'Join us on April 25 for a one-on-one session with your child’s class teacher.',
-      date: new Date('2025-04-25')
+      title: 'Admission Open 📚',
+      description: 'Admissions are open for next educational 2025-26 year',
+      date: new Date('2025-05-01')
     }
   ];
 
