@@ -16,10 +16,10 @@
     <li><a routerLink="/memory-game">Games</a></li>
     <li><a routerLink="/contact">Contact</a></li>
 
-    @if (!(isLoggedIn | async)) {
+    <!-- @if (!(isLoggedIn | async)) {
       <li><a routerLink="/login">Login</a></li>
       <li><a routerLink="/register">Register</a></li>
-    }
+    } -->
 
     @if (isLoggedIn | async) {
       <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
