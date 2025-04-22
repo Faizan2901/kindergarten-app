@@ -1,19 +1,36 @@
-import { DatePipe, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-announcements',
-  imports: [NgFor,DatePipe],
+  imports: [NgFor,DatePipe,NgIf],
   templateUrl: './announcements.component.html',
   styleUrl: './announcements.component.scss'
 })
 export class AnnouncementsComponent {
 
+  userService = inject(UserService);
+
+  userRole: string[] = [];
+
+  ngOnInit(): void {
+    this.userService.getUserInfo().subscribe({
+      next: () => {}
+    });
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.userRole = user.roles.map((role:any) => role.name);
+      }
+    });
+  }
+
   announcements = [
     {
-      title: 'Annual Sports Day 🎽',
-      description: 'Our fun-filled sports day is on 28th April. Don’t forget to wear your sports uniform!',
-      date: new Date('2025-04-28')
+      title: 'Annual Day 🥳',
+      description: 'Our fun-filled annual day is on 24th April.',
+      date: new Date('2025-04-24')
     },
     {
       title: 'Summer Break ☀️',
