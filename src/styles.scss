@@ -43,4 +43,7 @@ body {
 
   
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; margin-top: 90px;}
+main {
+  padding-top: 90px; // ya jitni navbar ki height ho
+}

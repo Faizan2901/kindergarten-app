@@ -51,4 +51,13 @@
     font-size: 0.9rem;
     color: #8d6e63;
   }
+  .email-link {
+    color: #5d4037;
+    text-decoration: none;
+    font-weight: 500;
+  
+    &:hover {
+      color: #ff6f00;
+    }
+  }
   
