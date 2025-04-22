@@ -5,7 +5,7 @@
     text-align: center;
     border-radius: 12px;
     margin: 3rem 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
   }
   
   .contact-section h1 {
@@ -107,10 +107,11 @@
   .contact-details a {
     color: #ff6f00;
     text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .contact-details a:hover {
-    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      color: #ff6f00;
+    }
+
   }
   
