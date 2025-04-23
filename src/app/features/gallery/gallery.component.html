@@ -1,0 +1,24 @@
+<h1 class="gallery-title">📷 Memories from Past Year 2024</h1>
+<div class="gallery-container">
+    
+    <div
+      class="gallery-card"
+      *ngFor="let photo of galleryImages; let i = index"
+      (click)="openImage(i)"
+    >
+      <img [src]="photo.url" [alt]="photo.alt" />
+      <div class="caption">{{ photo.caption }}</div>
+    </div>
+  </div>
+  
+  <!-- Fullscreen Modal -->
+  <div
+    class="fullscreen-overlay"
+    *ngIf="selectedImageIndex !== null"
+    (click)="closeImage()"
+  >
+    <button class="nav prev" (click)="prevImage($event)">⬅️</button>
+    <img [src]="galleryImages[selectedImageIndex!].url" />
+    <button class="nav next" (click)="nextImage($event)">➡️</button>
+  </div>
+  

@@ -14,6 +14,7 @@ import { ManageteacherComponent } from './teachers/manageteacher/manageteacher.c
 import { AttendancesummaryComponent } from './teachers/attendancesummary/attendancesummary.component';
 import { AttendanceComponent } from './teachers/attendance/attendance.component';
 import { AnnouncementsComponent } from './features/announcement/announcements/announcements.component';
+import { GalleryComponent } from './features/gallery/gallery.component';
 
 export const routes: Routes = [
     {
@@ -73,6 +74,10 @@ export const routes: Routes = [
         path: 'attendance',
         component: AttendanceComponent,
         canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
+    {
+        path: 'gallery',
+        component: GalleryComponent
     }
 
 ];

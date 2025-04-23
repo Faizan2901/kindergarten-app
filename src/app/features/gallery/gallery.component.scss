@@ -1,0 +1,99 @@
+.gallery-title {
+    font-size: 2.5rem;
+    color: #6a1b9a;
+    margin: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px #fff;
+  }
+  
+  .gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    min-height: 100vh;
+  
+    .gallery-card {
+      /* as it is */
+    }
+  }
+  
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    min-height: 100vh;
+  
+    .gallery-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+  
+      img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+      }
+  
+      .caption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        padding: 0.5rem;
+        font-weight: 600;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+  
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .fullscreen-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #fff;
+    }
+  
+    .nav {
+      position: absolute;
+      top: 50%;
+      font-size: 2rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+      transform: translateY(-50%);
+  
+      &.prev {
+        left: 2%;
+      }
+      &.next {
+        right: 2%;
+      }
+    }
+  }
+  
