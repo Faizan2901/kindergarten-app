@@ -1,23 +1,10 @@
 .gallery-title {
-    font-size: 2.5rem;
-    color: #6a1b9a;
-    margin: 2rem;
-    text-align: center;
-    text-shadow: 1px 1px #fff;
-  }
-  
-  .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-    min-height: 100vh;
-  
-    .gallery-card {
-      /* as it is */
-    }
-  }
-  
+  font-size: 2.5rem;
+  color: #6a1b9a;
+  margin: 2rem;
+  text-align: center;
+  text-shadow: 1px 1px #fff;
+} 
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
