@@ -20,6 +20,7 @@ export class UserService {
   getUserInfo(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}`).pipe(
       tap(res => {
+        console.log(res);
         this.currentUserSubject.next(res.user); // Emit user to all subscribers
       })
     );
