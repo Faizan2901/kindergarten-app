@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { Student } from '../../dto/student.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class UserService {
   getUserInfo(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}`).pipe(
       tap(res => {
+        console.log(res);
         this.currentUserSubject.next(res.user); // Emit user to all subscribers
       })
     );
@@ -27,6 +29,10 @@ export class UserService {
   // Optionally use this to clear user on logout
   clearUserInfo() {
     this.currentUserSubject.next(null);
+  }
+  
+  getAllStudents():Observable<{students:Student[]}>{
+    return this.http.get<{students:Student[]}>(`${this.apiUrl}/students`);
   }
   
 }

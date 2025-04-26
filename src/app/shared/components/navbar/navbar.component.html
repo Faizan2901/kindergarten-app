@@ -1,5 +1,7 @@
 <nav class="navbar">
-  <a class="logo" routerLink="/">🌈 Nanhe Munne Play Center</a>
+  <a class="logo" routerLink="/">
+    <span class="emoji">🌈</span><span class="text">Nanhe Munne Play Center</span>
+  </a>
 
   <!-- Hamburger menu toggle -->
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
@@ -13,18 +15,34 @@
 
     <li><a routerLink="/about">About</a></li>
     <li><a routerLink="/activities">Activities</a></li>
-    <li><a routerLink="/memory-game">Games</a></li>
-    <li><a routerLink="/announcements">Announcements</a></li>
-    <li><a routerLink="/gallery">Gallery</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
 
-    <!-- @if (!(isLoggedIn | async)) {
+    <!-- Desktop dropdown -->
+    
+
+    <!-- Mobile direct links -->
+    <li class="mobile-only"><a routerLink="/memory-game">Games</a></li>
+    <li class="mobile-only"><a routerLink="/announcements">Announcements</a></li>
+    <li class="mobile-only"><a routerLink="/gallery">Gallery</a></li>
+    <li class="mobile-only"><a routerLink="/contact">Contact</a></li>
+
+    @if (!(isLoggedIn | async)) {
       <li><a routerLink="/login">Login</a></li>
       <li><a routerLink="/register">Register</a></li>
-    } -->
+    }
 
     @if (isLoggedIn | async) {
       <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
     }
+
+    <li class="dropdown desktop-only">
+      <a>More ▾</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/memory-game">Games</a></li>
+        <li><a routerLink="/announcements">Announcements</a></li>
+        <li><a routerLink="/gallery">Gallery</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
+    </li>
+
   </ul>
 </nav>

@@ -28,9 +28,8 @@
           <label>Gender</label>
           <select name="gender" [(ngModel)]="registerData.gender" required #gender="ngModel">
             <option value="" disabled selected>Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option value="Boy">Boy</option>
+            <option value="Girl">Girl</option>
           </select>
           <div class="error" *ngIf="gender.invalid && gender.touched">Gender is required</div>
         </div>

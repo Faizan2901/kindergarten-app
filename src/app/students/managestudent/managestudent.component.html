@@ -1,1 +1,21 @@
-<p>managestudent works!</p>
+<div class="students-container">
+  <h2>🎓 Our Lovely Students</h2>
+
+  <div *ngIf="students.length === 0" class="no-data">No students found.</div>
+
+  <div class="student-card" *ngFor="let student of students">
+    <div class="avatar">
+      <img [src]="student.imageUrl" alt="Avatar" />
+    </div>
+    <div class="info">
+      <h3>{{ student.firstName }}</h3>
+      <p><strong>Play Center ID:</strong> {{ student.playCenterId }}</p>
+      <p><strong>Email:</strong> {{ student.email }}</p>
+      <p><strong>Contact:</strong> {{ student.contactNumber }}</p>
+      <p><strong>DOB:</strong> {{ student.dateOfBirth | date }}</p>
+      <p><strong>Gender:</strong> {{ student.gender }}</p>
+      <p><strong>Parents:</strong> {{ student.fatherName }} & {{ student.motherName }}</p>
+      <p><strong>Address:</strong> {{ student.address }}</p>
+    </div>
+  </div>
+</div>
