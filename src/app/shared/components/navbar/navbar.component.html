@@ -3,10 +3,9 @@
     <span class="emoji">🌈</span><span class="text">Nanhe Munne Play Center</span>
   </a>
 
-  <!-- Hamburger menu toggle -->
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
 
-  <ul class="nav-links" [class.active]="menuOpen">
+  <ul class="nav-links" [class.active]="menuOpen" (click)="handleMenuClick($event)">
     <li><a routerLink="/">Home</a></li>
 
     @if (isLoggedIn | async) {
@@ -16,23 +15,10 @@
     <li><a routerLink="/about">About</a></li>
     <li><a routerLink="/activities">Activities</a></li>
 
-    <!-- Desktop dropdown -->
-    
-
-    <!-- Mobile direct links -->
     <li class="mobile-only"><a routerLink="/memory-game">Games</a></li>
     <li class="mobile-only"><a routerLink="/announcements">Announcements</a></li>
     <li class="mobile-only"><a routerLink="/gallery">Gallery</a></li>
     <li class="mobile-only"><a routerLink="/contact">Contact</a></li>
-
-    <!-- @if (!(isLoggedIn | async)) {
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Register</a></li>
-    }
-
-    @if (isLoggedIn | async) {
-      <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
-    } -->
 
     <li class="dropdown desktop-only">
       <a>More ▾</a>
@@ -44,5 +30,13 @@
       </ul>
     </li>
 
+    <!-- @if (!(isLoggedIn | async)) {
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Register</a></li>
+    }
+
+    @if (isLoggedIn | async) {
+      <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
+    } -->
   </ul>
 </nav>

@@ -6,14 +6,14 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink,AsyncPipe],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 
-  authService=inject(AuthService);
-  router=inject(Router);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   menuOpen = false;
 
@@ -21,13 +21,18 @@ export class NavbarComponent {
     this.menuOpen = !this.menuOpen;
   }
 
+  isLoggedIn = this.authService.isLoggedIn$;
 
-  isLoggedIn=this.authService.isLoggedIn$;
-
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-  
+
+  handleMenuClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.tagName.toLowerCase() === 'a') {
+      this.menuOpen = false;
+    }
+  }
 
 }
