@@ -1,0 +1,59 @@
+.not-found-page {
+    background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    color: #4a148c;
+    padding: 20px;
+    min-height: 100vh;
+  
+    .content {
+      background: #fff3e0;
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  
+      h1 {
+        font-size: 120px;
+        margin-bottom: 10px;
+        color: #ff7043;
+        animation: bounce 2s infinite;
+      }
+  
+      h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #6a1b9a;
+      }
+  
+      p {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+  
+      .home-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #ff5722;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 25px;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #e64a19;
+        }
+      }
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(-20px);} 
+    60% {transform: translateY(-10px);} 
+  }
+  
