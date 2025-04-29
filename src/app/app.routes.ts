@@ -23,19 +23,19 @@ export const routes: Routes = [
         pathMatch: 'full',
         component: HomeComponent
     },
-    // {
-    //     path: 'login',
-    //     component: LoginComponent
-    // },
-    // {
-    //     path: 'register',
-    //     component: RegisterComponent
-    // },
-    // {
-    //     path: 'dashboard',
-    //     component: DashoboardComponent,
-    //     canActivate: [authGuard]
-    // },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashoboardComponent,
+        canActivate: [authGuard]
+    },
     {
         path: 'about',
         component: AboutComponent
@@ -56,26 +56,26 @@ export const routes: Routes = [
         path: 'announcements',
         component: AnnouncementsComponent
     },
-    // {
-    //     path: 'manage-students',
-    //     component: ManagestudentComponent,
-    //     canActivate: [roleGuard(['ADMIN','TEACHER'])]
-    // },
-    // {
-    //     path: 'manage-teachers',
-    //     component: ManageteacherComponent,
-    //     canActivate: [roleGuard(['ADMIN'])]
-    // },
-    // {
-    //     path: 'attendance-summary',
-    //     component: AttendancesummaryComponent,
-    //     canActivate: [roleGuard(['ADMIN','TEACHER'])]
-    // },
-    // {
-    //     path: 'attendance',
-    //     component: AttendanceComponent,
-    //     canActivate: [roleGuard(['ADMIN','TEACHER'])]
-    // },
+    {
+        path: 'manage-students',
+        component: ManagestudentComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
+    {
+        path: 'manage-teachers',
+        component: ManageteacherComponent,
+        canActivate: [roleGuard(['ADMIN'])]
+    },
+    {
+        path: 'attendance-summary',
+        component: AttendancesummaryComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
+    {
+        path: 'attendance',
+        component: AttendanceComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER'])]
+    },
     {
         path: 'gallery',
         component: GalleryComponent

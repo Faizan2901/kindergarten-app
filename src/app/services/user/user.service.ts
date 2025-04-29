@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Student } from '../../dto/student.interface';
+import { Attendance } from '../../dto/attendance.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,6 @@ export class UserService {
   getAllStudents():Observable<{students:Student[]}>{
     return this.http.get<{students:Student[]}>(`${this.apiUrl}/students`);
   }
+
   
 }
