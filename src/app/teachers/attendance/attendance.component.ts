@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
-import { formatDate, NgFor, NgIf } from '@angular/common';
+import { DatePipe, formatDate, NgFor, NgIf } from '@angular/common';
 import { Student } from '../../dto/student.interface';
 import { UserService } from '../../services/user/user.service';
 import { Attendance } from '../../dto/attendance.interface';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   selector: 'app-attendance',
   imports: [MatDatepickerModule, MatCheckboxModule, MatInputModule, MatNativeDateModule, FormsModule, NgFor],
   templateUrl: './attendance.component.html',
-  styleUrls: ['./attendance.component.scss']
+  styleUrls: ['./attendance.component.scss'],
 })
 export class AttendanceComponent {
 
@@ -37,21 +37,39 @@ export class AttendanceComponent {
       return;
     }
 
-    // Simulate an API call to fetch students
-    this.userService.getAllStudents().subscribe({
-      next: (res) => {
-        this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
-        console.log('Before Students:', this.students);
-        // Initialize student status as false (Absent) by default if not already set
-        this.students.forEach(student => {
-          student.status = student.status !== undefined ? student.status : false; // Ensure 'status' is a boolean
-        });
-        console.log('After Students:', this.students);
+    this.selectedDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
+
+    this.attendanceService.getAttendanceByDate(new Date(this.selectedDate)).subscribe({
+      next: (data) => { 
+        if (data.alreadyPresentAttendance) {
+          this.attendance = data.alreadyPresentAttendance;
+          alert("Attendance for this date already exists!, You can edit it");
+  
+          console.log("Selected Date:", this.selectedDate);
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
+         
+        } else {
+          // Simulate an API call to fetch students
+          this.userService.getAllStudents().subscribe({
+            next: (res) => {
+              this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
+              console.log('Before Students:', this.students);
+              // Initialize student status as false (Absent) by default if not already set
+              this.students.forEach(student => {
+                student.status = student.status !== undefined ? student.status : false; // Ensure 'status' is a boolean
+              });
+              console.log('After Students:', this.students);
+            },
+            error: (err) => {
+              console.error('Error fetching students:', err);
+            }
+          });
+        }
       },
       error: (err) => {
-        console.error('Error fetching students:', err);
+        console.error('Error fetching attendance:', err);
       }
-    });
+    });    
   }
 
   // Update attendance status when checkbox changes
@@ -70,8 +88,9 @@ export class AttendanceComponent {
     }
 
     const attendanceData : Attendance[]= this.students.map(student => ({
+      firstName: student.firstName,
       playCenterId: student.playCenterId,
-      date: formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'),
+      date: this.selectedDate,
       present: student.status // true for Present, false for Absent
     }as Attendance));
 
@@ -90,10 +109,13 @@ export class AttendanceComponent {
       next: (response) => {
         if (response.alreadyPresentAttendance) {
           this.attendance = response.alreadyPresentAttendance;
+          
           console.log("Attendance already exists, load for editing", this.attendance);
           
           alert("Attendance for this date already exists!");
-          // this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
+  
+          console.log("Selected Date:", this.selectedDate);
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
           
         } else if (response.savedAttendance) {
           this.attendance = response.savedAttendance;

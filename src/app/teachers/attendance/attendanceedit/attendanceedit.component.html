@@ -1,0 +1,25 @@
+<div class="edit-attendance-container">
+    <div class="edit-header">
+      <h2>✏️ Edit Attendance</h2>
+      <p>Modify the presence of our little stars</p>
+    </div>
+  
+    <div class="edit-date-info">
+      <strong>📅 Selected Date:</strong> {{ selectedDate | date:'fullDate' }}
+    </div>
+  
+    <div class="edit-student-list">
+      <div *ngFor="let attendance of attendanceList" class="student-edit-card">
+        <div class="student-details">
+          <div class="student-name">👧 {{ attendance.firstName }}</div>
+          <div class="student-id">🆔 ID: {{ attendance.playCenterId }}</div>
+        </div>
+        <mat-checkbox [(ngModel)]="attendance.present">Present</mat-checkbox>
+      </div>
+    </div>
+  
+    <div class="submit-button">
+      <button mat-raised-button color="primary" (click)="updateAttendance()">💾 Save Changes</button>
+    </div>
+  </div>
+  

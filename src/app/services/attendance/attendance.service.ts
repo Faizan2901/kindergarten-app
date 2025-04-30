@@ -10,7 +10,7 @@ import { AttendanceResponse } from '../../dto/attendanceresponse.interface';
 })
 export class AttendanceService {
 
-  http=inject(HttpClient);
+  constructor(private http: HttpClient) { }
   
 
   private apiUrl = 'http://localhost:8080/api/attendance';
@@ -20,5 +20,11 @@ export class AttendanceService {
     return this.http.post<AttendanceResponse>(`${this.apiUrl}/submit`, attendanceData);
   }  
 
+  getAttendanceByDate(date: Date): Observable<AttendanceResponse> {
+    const formattedDate = date.toISOString().split('T')[0]; // gives yyyy-MM-dd
+    return this.http.get<AttendanceResponse>(`${this.apiUrl}/by-date?date=${formattedDate}`);
+  }
+  
+  
   
 }
