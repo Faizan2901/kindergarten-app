@@ -44,10 +44,8 @@ export class AttendanceComponent {
         if (data.alreadyPresentAttendance) {
           this.attendance = data.alreadyPresentAttendance;
           alert("Attendance for this date already exists!, You can edit it");
-  
           console.log("Selected Date:", this.selectedDate);
           this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
-         
         } else {
           // Simulate an API call to fetch students
           this.userService.getAllStudents().subscribe({
@@ -107,17 +105,7 @@ export class AttendanceComponent {
 
     this.attendanceService.submitAttendance(attendanceData).subscribe({
       next: (response) => {
-        if (response.alreadyPresentAttendance) {
-          this.attendance = response.alreadyPresentAttendance;
-          
-          console.log("Attendance already exists, load for editing", this.attendance);
-          
-          alert("Attendance for this date already exists!");
-  
-          console.log("Selected Date:", this.selectedDate);
-          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
-          
-        } else if (response.savedAttendance) {
+      if (response.savedAttendance) {
           this.attendance = response.savedAttendance;
           console.log("Attendance saved", this.attendance);
         }

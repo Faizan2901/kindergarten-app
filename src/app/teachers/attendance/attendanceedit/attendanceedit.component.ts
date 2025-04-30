@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AttendanceService } from '../../../services/attendance/attendance.service';
 import { Attendance } from '../../../dto/attendance.interface';
 import { DatePipe, NgFor } from '@angular/common';
@@ -16,6 +16,7 @@ export class AttendanceeditComponent {
 
   attendanceService = inject(AttendanceService);
   attendanceList: Attendance[] = [];
+  router = inject(Router);
 
   selectedDate: Date = new Date();
 
@@ -36,10 +37,10 @@ export class AttendanceeditComponent {
         if (data.alreadyPresentAttendance) {
           this.attendanceList = data.alreadyPresentAttendance;
           console.log('Attendance List:', this.attendanceList);
-        } else {
-          this.attendanceList = [];
-        }
-      
+        }else if(data.attendanceNotFound){
+          alert('First take attendance!');
+          this.router.navigate(['/attendance']);
+        } 
       },
       error: (err) => {
         console.error('Error fetching attendance:', err);
