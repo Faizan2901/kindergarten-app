@@ -30,7 +30,7 @@ export class AttendanceComponent {
   attendance: Attendance[] = [];
   
 
-  // Load Students
+  
   loadStudents() {
     if (!this.selectedDate) {
       alert('Please select a date first!');
@@ -47,14 +47,14 @@ export class AttendanceComponent {
           console.log("Selected Date:", this.selectedDate);
           this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
         } else {
-          // Simulate an API call to fetch students
+          
           this.userService.getAllStudents().subscribe({
             next: (res) => {
               this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
               console.log('Before Students:', this.students);
-              // Initialize student status as false (Absent) by default if not already set
+                
               this.students.forEach(student => {
-                student.status = student.status !== undefined ? student.status : false; // Ensure 'status' is a boolean
+                student.status = student.status !== undefined ? student.status : false;   
               });
               console.log('After Students:', this.students);
             },
@@ -70,26 +70,27 @@ export class AttendanceComponent {
     });    
   }
 
-  // Update attendance status when checkbox changes
+
   updateAttendanceStatus(student: Student) 
   {
-    // Simply toggle between present (true) and absent (false)
-    student.status = !student.status;  // Toggle between true (Present) and false (Absent)
+    student.status = !student.status;  
     console.log(`Updated attendance for ${student.firstName}: ${student.status ? 'Present' : 'Absent'}`);
   }
 
-  // Submit the attendance data
+  
   submitAttendance() {
     if (!this.selectedDate) {
       alert('Please select a date before submitting!');
       return;
     }
 
+    this.selectedDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
+
     const attendanceData : Attendance[]= this.students.map(student => ({
       firstName: student.firstName,
       playCenterId: student.playCenterId,
       date: this.selectedDate,
-      present: student.status // true for Present, false for Absent
+      present: student.status 
     }as Attendance));
 
     
@@ -107,17 +108,24 @@ export class AttendanceComponent {
       next: (response) => {
       if (response.savedAttendance) {
           this.attendance = response.savedAttendance;
+          console.log("Attendance saved", this.selectedDate);
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
           console.log("Attendance saved", this.attendance);
+          this.clearForm();
         }
       },
       error: (error) => {
         console.error("Error:", error);
       }
     });
-    
-    
+   
   }
 
+  clearForm() {
+    this.selectedDate = '';
+    this.students = [];
+    this.attendance = [];
+  }
   
 
 }

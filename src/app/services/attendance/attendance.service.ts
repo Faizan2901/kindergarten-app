@@ -25,6 +25,9 @@ export class AttendanceService {
     return this.http.get<AttendanceResponse>(`${this.apiUrl}/by-date?date=${formattedDate}`);
   }
   
-  
+  updateAttendance(date: string, attendanceData: Attendance[]): Observable<AttendanceResponse> {
+    return this.http.put<AttendanceResponse>(`${this.apiUrl}/update?date=${date}`, attendanceData);
+  }
+
   
 }

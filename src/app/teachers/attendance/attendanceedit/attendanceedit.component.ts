@@ -17,6 +17,7 @@ export class AttendanceeditComponent {
   attendanceService = inject(AttendanceService);
   attendanceList: Attendance[] = [];
   router = inject(Router);
+  updatedList: Attendance[] = [];
 
   selectedDate: Date = new Date();
 
@@ -48,8 +49,23 @@ export class AttendanceeditComponent {
     });
   }
   
-  updateAttendance(){
-    alert('Attendance updated successfully!');
+  updateAttendance() {
+    const formattedDate = this.selectedDate.toISOString().split('T')[0]; // gives yyyy-MM-dd
+   this.attendanceService.updateAttendance(formattedDate, this.attendanceList).subscribe({
+      next: (data) => {
+        if (data.attendanceUpdated) {
+          alert('Attendance updated successfully!');
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
+        } else if(data.atLeastOnePresent){
+          alert(formattedDate + ' attendance will be deleted!');
+          this.router.navigate(['/attendance']);
+        }
+      },
+      error: (err) => {
+        console.error('Error updating attendance:', err);
+        alert('Error updating attendance. Please try again.');
+      }
+    });
   }
 
 }
