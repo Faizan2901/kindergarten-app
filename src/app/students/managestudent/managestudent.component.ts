@@ -5,6 +5,7 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { single } from 'rxjs';
 import { FilterstudentsPipe } from '../../filter/pipes/filter-students/filterstudents.pipe';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-managestudent',
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class ManagestudentComponent implements OnInit{
  
   userService=inject(UserService);
+  router=inject(Router);
 
   searchText=signal('');
 
@@ -31,6 +33,10 @@ export class ManagestudentComponent implements OnInit{
         console.error('Error fetching students:', err);
       }
     });
+  }
+
+  editStudent(student: Student) {
+    this.router.navigate(['/edit-student'], { state: { studentData: student } });
   }
 
 }

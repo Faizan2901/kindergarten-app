@@ -22,6 +22,12 @@
       <p><strong>Gender:</strong> {{ student.gender }}</p>
       <p><strong>Parents:</strong> {{ student.fatherName }} & {{ student.motherName }}</p>
       <p><strong>Address:</strong> {{ student.address }}</p>
+  
+      <!-- Inside the .info div of each student -->
+      <button class="edit-btn" (click)="editStudent(student)">
+        ✏️ Edit
+      </button>
+
     </div>
-  </div>
+  </div>  
 </div>
