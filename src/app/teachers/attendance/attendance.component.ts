@@ -44,11 +44,6 @@ export class AttendanceComponent implements OnInit {
   
   
   loadStudents() {
-    if (!this.selectedDate) {
-      alert('Please select a date first!');
-      return;
-    }
-
     this.selectedDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
 
     this.attendanceService.getAttendanceByDate(new Date(this.selectedDate)).subscribe({
@@ -59,7 +54,6 @@ export class AttendanceComponent implements OnInit {
           console.log("Selected Date:", this.selectedDate);
           this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
         } else {
-          
           this.userService.getAllStudents().subscribe({
             next: (res) => {
               this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
