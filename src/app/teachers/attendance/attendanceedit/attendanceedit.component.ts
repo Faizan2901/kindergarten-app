@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AttendanceService } from '../../../services/attendance/attendance.service';
 import { Attendance } from '../../../dto/attendance.interface';
 import { DatePipe, NgFor } from '@angular/common';
@@ -8,7 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-attendanceedit',
-  imports: [NgFor,FormsModule,DatePipe,MatCheckboxModule],
+  imports: [NgFor,FormsModule,DatePipe,MatCheckboxModule,RouterLink],
   templateUrl: './attendanceedit.component.html',
   styleUrl: './attendanceedit.component.scss'
 })
@@ -55,10 +55,13 @@ export class AttendanceeditComponent {
       next: (data) => {
         if (data.attendanceUpdated) {
           alert('Attendance updated successfully!');
-          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: formattedDate } });
         } else if(data.atLeastOnePresent){
           alert(formattedDate + ' attendance will be deleted!');
           this.router.navigate(['/attendance']);
+        }else{
+          alert('No changes made to attendance.');
+          this.router.navigate(['/attendance/edit'], { queryParams: { date: formattedDate } });
         }
       },
       error: (err) => {

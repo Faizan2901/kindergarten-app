@@ -30,6 +30,7 @@ export class AttendanceComponent implements OnInit {
 
   attendance: Attendance[] = [];
   
+  
   ngOnInit(): void {
       this.attendanceService.getMarkedDates().subscribe({
         next: (dates) => {
@@ -44,36 +45,20 @@ export class AttendanceComponent implements OnInit {
   
   
   loadStudents() {
-    this.selectedDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
-
-    this.attendanceService.getAttendanceByDate(new Date(this.selectedDate)).subscribe({
-      next: (data) => { 
-        if (data.alreadyPresentAttendance) {
-          this.attendance = data.alreadyPresentAttendance;
-          alert("Attendance for this date already exists!, You can edit it");
-          console.log("Selected Date:", this.selectedDate);
-          this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
-        } else {
-          this.userService.getAllStudents().subscribe({
-            next: (res) => {
-              this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
-              console.log('Before Students:', this.students);
-                
-              this.students.forEach(student => {
-                student.status = student.status !== undefined ? student.status : false;   
-              });
-              console.log('After Students:', this.students);
-            },
-            error: (err) => {
-              console.error('Error fetching students:', err);
-            }
-          });
-        }
+    this.userService.getAllStudents().subscribe({
+      next: (res) => {
+        this.students = res.students.filter((student: Student) => student.playCenterId.includes("STUDENT"));
+        console.log('Before Students:', this.students);
+          
+        this.students.forEach(student => {
+          student.status = student.status !== undefined ? student.status : false;   
+        });
+        console.log('After Students:', this.students);
       },
       error: (err) => {
-        console.error('Error fetching attendance:', err);
+        console.error('Error fetching students:', err);
       }
-    });    
+    });
   }
 
 
@@ -133,7 +118,7 @@ export class AttendanceComponent implements OnInit {
       : '';
   };
 
-  onDateChange(date: Date) {
+  onDateChange(date: Date | null) {
 
     if(!date){
       return;
@@ -150,6 +135,13 @@ export class AttendanceComponent implements OnInit {
     }
 
   }
+
+  myDateFilter: (d: Date | null) => boolean = (d: Date | null): boolean => {
+    if (!d) return false; 
+    const day = d.getDay();
+    return day !== 0 && day !== 6; // disable Sunday (0) and Saturday (6)
+  };
+  
 
   clearForm() {
     this.selectedDate = '';

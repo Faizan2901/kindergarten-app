@@ -9,14 +9,20 @@
     <mat-form-field appearance="outline" style="width: 100%;">
       <mat-label>Select Date</mat-label>
       <input matInput 
-       [matDatepicker]="picker" 
-       [(ngModel)]="selectedDate" 
-       [max]="today" 
-       (dateChange)="onDateChange($event.value)">
+             [matDatepicker]="picker" 
+             [(ngModel)]="selectedDate" 
+             [max]="today"
+             [matDatepickerFilter]="myDateFilter" 
+             (dateChange)="onDateChange($event.value)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker [dateClass]="highlightMarkedDates"></mat-datepicker>
     </mat-form-field>
-    <!-- <button mat-raised-button color="primary" (click)="loadStudents()">Load Students</button> -->
+
+    <!-- 🔶 Legend for Highlighted Dates -->
+    <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+      <div style="width: 16px; height: 16px; background-color: #F8B55F; border-radius: 4px;"></div>
+      <span style="font-size: 14px;"> Attendance Already Taken</span>
+    </div>
   </div>
 
   <div class="student-list">
@@ -26,13 +32,13 @@
       </div>
 
       <div class="attendance-toggle">
-        <!-- Checkbox for Present -->
         <mat-checkbox [checked]="student.status" (change)="updateAttendanceStatus(student)">
           Present
         </mat-checkbox>
       </div>
     </div>
   </div>
+
   <ng-container *ngIf="students.length != 0">
     <div style="text-align: center; margin-top: 20px;">
       <button mat-raised-button color="accent" (click)="submitAttendance()">Submit Attendance</button>
