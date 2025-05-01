@@ -1,38 +1,41 @@
-  <div class="attendance-container">
-    
-    <div class="attendance-header">
-      <h2>📋 Student Attendance</h2>
-      <p>Empowering Little Minds Every Day!</p>
-    </div>
+<div class="attendance-container">
 
-    <div class="attendance-form">
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Select Date</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [max]="today">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="loadStudents()">Load Students</button>
-    </div>
+  <div class="attendance-header">
+    <h2>📋 Student Attendance</h2>
+    <p>Empowering Little Minds Every Day!</p>
+  </div>
 
-    <div class="student-list">
-      <div *ngFor="let student of students" class="student-card">
-          <div class="student-name">
-             {{ student.firstName }} - <strong>{{ student.playCenterId }}</strong> 
-          </div>
-        
-          <div class="attendance-toggle">
-            <!-- Checkbox for Present -->
-            <mat-checkbox [checked]="student.status" (change)="updateAttendanceStatus(student)">
-              Present
-            </mat-checkbox>
-                      
-          </div>
+  <div class="attendance-form">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Select Date</mat-label>
+      <input matInput 
+       [matDatepicker]="picker" 
+       [(ngModel)]="selectedDate" 
+       [max]="today" 
+       (dateChange)="onDateChange($event.value)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [dateClass]="highlightMarkedDates"></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="loadStudents()">Load Students</button>
+  </div>
+
+  <div class="student-list">
+    <div *ngFor="let student of students" class="student-card">
+      <div class="student-name">
+        {{ student.firstName }} - <strong>{{ student.playCenterId }}</strong>
+      </div>
+
+      <div class="attendance-toggle">
+        <!-- Checkbox for Present -->
+        <mat-checkbox [checked]="student.status" (change)="updateAttendanceStatus(student)">
+          Present
+        </mat-checkbox>
       </div>
     </div>
-
-    <div style="text-align: center; margin-top: 20px;">
-      <button mat-raised-button color="accent" (click)="submitAttendance()">Submit Attendance</button>
-    </div>
-
   </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <button mat-raised-button color="accent" (click)="submitAttendance()">Submit Attendance</button>
+  </div>
+
+</div>

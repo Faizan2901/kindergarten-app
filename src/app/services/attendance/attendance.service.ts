@@ -29,5 +29,11 @@ export class AttendanceService {
     return this.http.put<AttendanceResponse>(`${this.apiUrl}/update?date=${date}`, attendanceData);
   }
 
+
+  getMarkedDates(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}`);
+  }
+
+  
   
 }

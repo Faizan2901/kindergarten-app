@@ -1,3 +1,4 @@
+/* Already present styles (no change) */
 .attendance-container {
   padding: 30px;
   max-width: 1000px;
@@ -85,4 +86,12 @@ button:hover {
 
 button.mat-raised-button {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ NEW: Highlight for already marked attendance dates */
+::ng-deep .marked-date {
+  background-color: #fff59d !important; /* soft yellow */
+  border-radius: 50% !important;
+  color: black !important;
+  font-weight: bold;
 }

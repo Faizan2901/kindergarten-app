@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss'],
 })
-export class AttendanceComponent {
+export class AttendanceComponent implements OnInit {
 
   userService = inject(UserService);
   attendanceService = inject(AttendanceService);
@@ -26,10 +26,22 @@ export class AttendanceComponent {
   selectedDate: string = '';
   today: Date = new Date();
   students: Student[] = [];
+  markedDates: Date[] = [];
 
   attendance: Attendance[] = [];
   
-
+  ngOnInit(): void {
+      this.attendanceService.getMarkedDates().subscribe({
+        next: (dates) => {
+          this.markedDates = dates.map(dateStr => new Date(dateStr));
+          console.log("Marked Dates:", this.markedDates);
+        },
+        error: (error) => {
+          console.error('Error fetching marked dates:', error);
+        }
+      });
+  }
+  
   
   loadStudents() {
     if (!this.selectedDate) {
@@ -119,6 +131,30 @@ export class AttendanceComponent {
       }
     });
    
+  }
+
+  highlightMarkedDates = (d: Date): string => {
+    return this.markedDates.some(date => date.toDateString() === d.toDateString())
+      ? 'marked-date'
+      : '';
+  };
+
+  onDateChange(date: Date) {
+
+    if(!date){
+      return;
+    }
+    this.selectedDate = formatDate(date, 'yyyy-MM-dd', 'en-US');
+
+    const isMarked = this.markedDates.some(markedDate => markedDate.toDateString() === date.toDateString());
+
+    if (isMarked) {
+      alert('You will be redirected to edit attendance for this date!');
+      this.router.navigate(['/attendance/edit'], { queryParams: { date: this.selectedDate } });
+    } else {
+      this.loadStudents();
+    }
+
   }
 
   clearForm() {
