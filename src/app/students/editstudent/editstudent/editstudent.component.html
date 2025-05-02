@@ -35,10 +35,9 @@
       <div class="form-group">
         <label>Gender</label>
         <select [(ngModel)]="student.gender" name="gender" required #gender="ngModel">
-          <option value="" disabled>Select Gender</option>
-          <option value="Male">👦 Male</option>
-          <option value="Female">👧 Female</option>
-          <option value="Other">🌈 Other</option>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="Boy">👦 Boy</option>
+          <option value="Girl">👧 Girl</option>
         </select>
         <div class="error" *ngIf="gender.invalid && gender.touched">Gender is required</div>
       </div>
@@ -59,11 +58,6 @@
         <label>Address</label>
         <textarea [(ngModel)]="student.address" name="address" required #address="ngModel" rows="3"></textarea>
         <div class="error" *ngIf="address.invalid && address.touched">Address is required</div>
-      </div>
-
-      <div class="form-group">
-        <label>Profile Image URL</label>
-        <input type="text" [(ngModel)]="student.imageUrl" name="imageUrl" />
       </div>
 
       <!-- Optional Photo Upload -->
