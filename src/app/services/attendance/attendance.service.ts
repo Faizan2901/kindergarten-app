@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Attendance } from '../../dto/attendance.interface';
+import { Injectable } from '@angular/core';
+import { Attendance, MonthlyAttendanceStat } from '../../dto/attendance.interface';
 import { Observable } from 'rxjs';
 import { AttendanceResponse } from '../../dto/attendanceresponse.interface';
 
@@ -34,6 +33,8 @@ export class AttendanceService {
     return this.http.get<string[]>(`${this.apiUrl}`);
   }
 
-  
-  
+  getMonthlyAttendanceStats(studentId: string): Observable<MonthlyAttendanceStat[]> {
+    return this.http.get<MonthlyAttendanceStat[]>(`${this.apiUrl}/attendance/student/${studentId}/monthly-stats`);
+  }
+    
 }

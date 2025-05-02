@@ -15,16 +15,14 @@ export class AnnouncementsComponent {
   userRole: string[] = [];
 
   ngOnInit(): void {
-    this.userService.getUserInfo().subscribe({
-      next: () => {}
-    });
-
+    this.userService.getUserInfo().subscribe();
+  
     this.userService.currentUser$.subscribe(user => {
-      if (user) {
-        this.userRole = user.roles.map((role:any) => role.name);
+      if (user && user.roles) {
+        this.userRole = user.roles.map((role: any) => role.name);
       }
     });
-  }
+  }  
 
   announcements = [
     {

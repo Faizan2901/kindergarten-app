@@ -19,18 +19,11 @@ export function roleGuard(allowedRoles: string[]): CanActivateFn {
 
     return userService.currentUser$.pipe(
       take(1),
-      // Step 1: Check if user already available
-      map((user: any) => {
-        if (user) return user;
-        return null;
-      }),
-      // Step 2: If not, fetch from backend
       switchMap((user: any) => {
         if (user) {
           return of(user);
         } else {
           return userService.getUserInfo().pipe(
-            map(res => res.user),
             catchError(err => {
               console.error('❌ Error loading user info in guard:', err);
               router.navigate(['/login']);
@@ -39,7 +32,6 @@ export function roleGuard(allowedRoles: string[]): CanActivateFn {
           );
         }
       }),
-      // Step 3: Evaluate roles and return true/false
       map((user: any) => {
         if (!user) {
           alert('User info not loaded!');
@@ -47,7 +39,7 @@ export function roleGuard(allowedRoles: string[]): CanActivateFn {
           return false;
         }
 
-        const roles = user.roles.map((role: any) => role.name);
+        const roles = user.roles?.map((role: any) => role.name) ?? [];
         const hasAccess = roles.some((role: string) => allowedRoles.includes(role));
 
         if (!hasAccess) {

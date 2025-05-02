@@ -6,3 +6,9 @@ export interface Attendance {
   date: string;
   present: boolean; 
 }
+
+export interface MonthlyAttendanceStat {
+  month: string;
+  totalDays: number;
+  presentDays: number;
+}

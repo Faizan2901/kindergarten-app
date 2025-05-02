@@ -10,5 +10,6 @@ export interface Student {
   fatherName: string;
   motherName: string;
   imageUrl: string;
-  status?: boolean;  
+  status?: boolean;
+  roles?: string[]; // 👈 Add this line
 }

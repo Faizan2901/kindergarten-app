@@ -1,0 +1,24 @@
+<div class="attendance-stats">
+    <h2 class="text-lg font-bold mb-4">Monthly Attendance Summary</h2>
+    <table class="w-full table-auto border rounded-xl">
+      <thead class="bg-blue-100">
+        <tr>
+          <th class="px-4 py-2">Month</th>
+          <th class="px-4 py-2">Present Days</th>
+          <th class="px-4 py-2">Total Days</th>
+          <th class="px-4 py-2">Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of monthlyStats" class="text-center border-t">
+          <td class="px-4 py-2">{{ stat.month }}</td>
+          <td class="px-4 py-2">{{ stat.presentDays }}</td>
+          <td class="px-4 py-2">{{ stat.totalDays }}</td>
+          <td class="px-4 py-2">
+            {{ (stat.presentDays / stat.totalDays * 100) | number : '1.0-0' }}%
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

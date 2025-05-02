@@ -18,6 +18,7 @@ import { GalleryComponent } from './features/gallery/gallery.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound/pagenotfound.component';
 import { AttendanceeditComponent } from './teachers/attendance/attendanceedit/attendanceedit.component';
 import { EditstudentComponent } from './students/editstudent/editstudent/editstudent.component';
+import { MyattendanceComponent } from './students/myattendance/myattendance.component';
 
 export const routes: Routes = [
     {
@@ -91,6 +92,11 @@ export const routes: Routes = [
         path: 'edit-student',
         component: EditstudentComponent,
         canActivate: [roleGuard(['ADMIN','TEACHER'])] 
+    },
+    {
+        path: 'my-attendance',
+        component: MyattendanceComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER','STUDENT'])]
     },
     {
         path: '**', 
