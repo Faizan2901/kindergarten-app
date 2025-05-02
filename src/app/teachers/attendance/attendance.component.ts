@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,10 +10,11 @@ import { UserService } from '../../services/user/user.service';
 import { Attendance } from '../../dto/attendance.interface';
 import { AttendanceService } from '../../services/attendance/attendance.service';
 import { Router } from '@angular/router';
+import { FilterstudentsPipe } from '../../filter/pipes/filter-students/filterstudents.pipe';
 
 @Component({
   selector: 'app-attendance',
-  imports: [MatDatepickerModule, MatCheckboxModule, MatInputModule, MatNativeDateModule, FormsModule, NgFor,NgIf],
+  imports: [MatDatepickerModule, MatCheckboxModule, MatInputModule, MatNativeDateModule, FormsModule, NgFor,NgIf,FilterstudentsPipe],
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss'],
 })
@@ -22,6 +23,7 @@ export class AttendanceComponent implements OnInit {
   userService = inject(UserService);
   attendanceService = inject(AttendanceService);
   router= inject(Router);
+  searchText=signal('');
 
   selectedDate: string = '';
   today: Date = new Date();

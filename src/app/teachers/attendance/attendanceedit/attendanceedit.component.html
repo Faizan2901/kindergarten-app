@@ -7,9 +7,13 @@
     <div class="edit-date-info">
       <strong>📅 Selected Date:</strong> {{ selectedDate | date:'fullDate' }}
     </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search students..." [(ngModel)]="searchText" />
+    </div>
   
     <div class="edit-student-list">
-      <div *ngFor="let attendance of attendanceList" class="student-edit-card">
+      <div *ngFor="let attendance of attendanceList | filterAttendances:searchText()" class="student-edit-card">
         <div class="student-details">
           <div class="student-name">👧 {{ attendance.firstName }}</div>
           <div class="student-id">🆔 ID: {{ attendance.playCenterId }}</div>
@@ -18,13 +22,16 @@
       </div>
     </div>
   
-    <div class="submit-button">
-      <button mat-raised-button color="primary" (click)="updateAttendance()">💾 Save Changes</button>
-      &nbsp;
-      <button mat-raised-button color="primary" routerLink="/attendance">Attendance Bar</button>
+    <div *ngIf="(attendanceList | filterAttendances:searchText()).length === 0" class="no-data">
+      No students found.
     </div>
-    <div class="submit-button">
-      
-    </div>
-  </div>
+
+    <ng-container *ngIf="(attendanceList | filterAttendances:searchText()).length != 0">
+      <div class="submit-button">
+        <button mat-raised-button color="primary" (click)="updateAttendance()">💾 Save Changes</button>
+        &nbsp;
+        <button mat-raised-button color="primary" routerLink="/attendance">Attendance Bar</button>
+      </div>
+    </ng-container>
+</div>
   

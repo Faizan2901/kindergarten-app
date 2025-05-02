@@ -1,14 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AttendanceService } from '../../../services/attendance/attendance.service';
 import { Attendance } from '../../../dto/attendance.interface';
-import { DatePipe, NgFor } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FilterAttendancesPipe } from '../../../filter/pipes/filter-attendances/filter-attendances.pipe';
 
 @Component({
   selector: 'app-attendanceedit',
-  imports: [NgFor,FormsModule,DatePipe,MatCheckboxModule,RouterLink],
+  imports: [NgFor,FormsModule,DatePipe,MatCheckboxModule,RouterLink,FilterAttendancesPipe,NgIf],
   templateUrl: './attendanceedit.component.html',
   styleUrl: './attendanceedit.component.scss'
 })
@@ -18,6 +19,7 @@ export class AttendanceeditComponent {
   attendanceList: Attendance[] = [];
   router = inject(Router);
   updatedList: Attendance[] = [];
+  searchText=signal('');
 
   selectedDate: Date = new Date();
 
