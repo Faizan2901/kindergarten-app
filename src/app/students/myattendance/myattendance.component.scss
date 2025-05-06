@@ -1,0 +1,60 @@
+.attendance-stats {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      color: #3b5998;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+  
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 20px;
+      overflow: hidden;
+      font-size: 1.1rem;
+  
+      thead {
+        background: #aee1f9;
+  
+        th {
+          padding: 1rem;
+          color: #ffffff;
+          background-color: #00aaff;
+          border: 2px solid #fff;
+          font-weight: bold;
+        }
+      }
+  
+      tbody {
+        tr {
+          background-color: #fff8dc;
+          transition: background-color 0.3s ease;
+  
+          &:nth-child(even) {
+            background-color: #ffe4e1;
+          }
+  
+          &:hover {
+            background-color: #d0f0c0;
+          }
+  
+          td {
+            padding: 1rem;
+            text-align: center;
+            color: #333;
+            border: 1px solid #f0f0f0;
+          }
+        }
+      }
+    }
+  }
+  

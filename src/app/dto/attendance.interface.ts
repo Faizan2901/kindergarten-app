@@ -11,4 +11,5 @@ export interface MonthlyAttendanceStat {
   month: string;
   totalDays: number;
   presentDays: number;
+  absentDays: number;
 }
