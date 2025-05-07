@@ -1,1 +1,34 @@
-<p>attendancesummary works!</p>
+<div class="students-container">
+    <h2>🎓 Students Attendance Statistics</h2>
+  
+    <div class="search-bar">
+      <input type="text" placeholder="Search students..." [(ngModel)]="searchText" />
+    </div>
+  
+    <div *ngIf="(students | filterstudents:searchText()).length === 0" class="no-data">
+      No students found.
+    </div>
+  
+    <div class="student-card" *ngFor="let student of students | filterstudents:searchText()">
+      <div class="avatar">
+        <img [src]="student.imageUrl" alt="Avatar" />
+      </div>
+      <div class="info">
+        <h3>{{ student.firstName }}</h3>
+        <p><strong>Play Center ID:</strong> {{ student.playCenterId }}</p>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Contact:</strong> {{ student.contactNumber }}</p>
+        <p><strong>DOB:</strong> {{ student.dateOfBirth | date }}</p>
+        <p><strong>Gender:</strong> {{ student.gender }}</p>
+        <p><strong>Parents:</strong> {{ student.fatherName }} & {{ student.motherName }}</p>
+        <p><strong>Address:</strong> {{ student.address }}</p>
+    
+        <!-- Inside the .info div of each student -->
+        <button class="edit-btn" (click)="showStatistics(student)">
+            📈 Statistics
+        </button>
+  
+      </div>
+    </div>  
+  </div>
+  

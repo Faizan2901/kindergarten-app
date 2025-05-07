@@ -19,23 +19,38 @@ export class MyattendanceComponent implements OnInit {
 
   monthlyStats: MonthlyAttendanceStat[] = [];
 
+  studentName: string = '';
 
-  ngOnInit(): void { 
-    this.userService.currentUser$.pipe(take(1)).subscribe(user => {
-      if(user) {
-        console.log(user.playCenterId);
-        this.attendanceService.getMonthlyAttendanceStats(user.playCenterId).subscribe(
-          (response) => {
-            this.monthlyStats = response;
-            console.log('Monthly Attendance Stats:', this.monthlyStats);
-          },
-          (error) => {
-            console.error('Error fetching monthly attendance stats:', error);
-          }
-        );
-      }
-    });
+
+  ngOnInit(): void {
+    const state = history.state;
+  
+    if (state.monthlyStudentStats) {
+      this.monthlyStats = state.monthlyStudentStats;
+    }
+  
+    if (state.studentName) {
+      this.studentName = state.studentName;
+    }
+  
+
+    if (!state.monthlyStudentStats) {
+      this.userService.currentUser$.pipe(take(1)).subscribe(user => {
+        if (user) {
+          this.attendanceService.getMonthlyAttendanceStats(user.playCenterId).subscribe(
+            (response) => {
+              this.monthlyStats = response;
+              this.studentName = user.firstName; 
+            },
+            (error) => {
+              console.error('Error fetching monthly attendance stats:', error);
+            }
+          );
+        }
+      });
+    }
   }
-
+  
+  
 }
 
