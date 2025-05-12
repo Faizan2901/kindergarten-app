@@ -27,7 +27,7 @@ export class EditstudentComponent {
     contactNumber: '',
     fatherName: '',
     motherName: '',
-    imageUrl: '',
+    photoUrl: '',
     status: false  
   }
     

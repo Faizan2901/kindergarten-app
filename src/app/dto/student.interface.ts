@@ -9,7 +9,7 @@ export interface Student {
   contactNumber: string;
   fatherName: string;
   motherName: string;
-  imageUrl: string;
+  photoUrl: string;
   status?: boolean;
   roles?: string[]; // 👈 Add this line
 }

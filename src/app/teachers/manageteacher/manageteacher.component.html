@@ -11,7 +11,7 @@
   
     <div class="student-card" *ngFor="let student of students | filterstudents:searchText()">
       <div class="avatar">
-        <img [src]="student.imageUrl" alt="Avatar" />
+        <img [src]="student.photoUrl" alt="Avatar" />
       </div>
       <div class="info">
         <h3>{{ student.firstName }}</h3>

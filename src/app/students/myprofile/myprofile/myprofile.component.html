@@ -1,19 +1,28 @@
 <div class="profile-summary">
-    <h2 class="title">🌟 My Profile 👦</h2>
-  
-    <div class="profile-info">
-      <div class="avatar">
-        <img [src]="user?.imageUrl" alt="Profile Avatar" />
-      </div>
-  
-      <div class="details">
-        <p><strong>🆔 PlayCenterId:</strong> {{ user?.playCenterId }}</p>
-        <p><strong>👤 Name:</strong> {{ user?.firstName }}</p>
-        <p><strong>👪 Parents:</strong> {{ user?.fatherName }} & {{ user?.motherName}}</p>
-        <p><strong>🎂 Birth Date:</strong> {{ user?.dateOfBirth }}</p>
-        <p><strong>📧 Email:</strong> {{ user?.email }}</p>
-        <p><strong>📍 Address:</strong> {{ user?.address }}</p>
+  <h2 class="title">🌟 My Profile 👦</h2>
+
+  <div class="profile-info">
+    <div class="avatar">
+      <img [src]="user?.photoUrl" alt="Profile Avatar" />
+    </div>
+
+    <div class="details">
+      <p><strong>🆔 PlayCenterId:</strong> {{ user?.playCenterId }}</p>
+      <p><strong>👤 Name:</strong> {{ user?.firstName }}</p>
+      <p><strong>👪 Parents:</strong> {{ user?.fatherName }} & {{ user?.motherName }}</p>
+      <p><strong>🎂 Age & Birth Date:</strong> {{ age }} & {{ user?.dateOfBirth | date }}</p>
+      <p><strong>♂️ Gender:</strong> {{ user?.gender }}</p>
+      <p><strong>📞 Contact:</strong> {{ user?.contactNumber }}</p>
+      <p><strong>📧 Email:</strong> {{ user?.email }}</p>
+      <p><strong>📍 Address:</strong> {{ user?.address }}</p>
+
+      <!-- Roles section -->
+      <div class="roles-section">
+        <strong>🔑 Roles:</strong>
+        <div class="roles-badges">
+          <span *ngFor="let role of roles" class="badge">{{ role }}</span>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

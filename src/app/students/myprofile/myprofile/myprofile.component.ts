@@ -17,17 +17,34 @@ export class MyprofileComponent implements OnInit {
   userService = inject(UserService);
   attendanceService = inject(AttendanceService);
 
-  user: Student | null = null;
+  user: Student | null = null
+  age: number | null = null;
+  roles: string[] = [];
 
   ngOnInit(): void {
     this.userService.currentUser$.pipe(take(1)).subscribe(user => {
       if (user) {
-        console.log('User from service:', user);
         this.user = user;
-        console.log('Image Url from backend:', user.imageUrl);
-        console.log('Image Url from frontend:', this.user.imageUrl);
+        this.roles = user.roles?.map((role: any) => role.name) ?? []
+        this.age=this.calculateAge(user.dateOfBirth);
         console.log('User:', this.user);
       }
     });
   }
+
+  calculateAge(dateOfBirth: string): number {
+    const birthDate = new Date(dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+  
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+  
+    return age;
+  }
+
 }
+
+
