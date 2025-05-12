@@ -4,11 +4,11 @@ import { Student } from '../../dto/student.interface';
 import { take } from 'rxjs';
 import { AttendanceService } from '../../services/attendance/attendance.service';
 import { MonthlyAttendanceStat } from '../../dto/attendance.interface';
-import { DecimalPipe, NgFor } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-myattendance',
-  imports: [DecimalPipe,NgFor],
+  imports: [DecimalPipe,NgFor,NgIf],
   templateUrl: './myattendance.component.html',
   styleUrl: './myattendance.component.scss'
 })
@@ -21,12 +21,15 @@ export class MyattendanceComponent implements OnInit {
 
   studentName: string = '';
 
+  isStudent: boolean = false;
+
 
   ngOnInit(): void {
     const state = history.state;
   
     if (state.monthlyStudentStats) {
       this.monthlyStats = state.monthlyStudentStats;
+      this.isStudent = false;
     }
   
     if (state.studentName) {
@@ -35,6 +38,7 @@ export class MyattendanceComponent implements OnInit {
   
 
     if (!state.monthlyStudentStats) {
+      this.isStudent = true;
       this.userService.currentUser$.pipe(take(1)).subscribe(user => {
         if (user) {
           this.attendanceService.getMonthlyAttendanceStats(user.playCenterId).subscribe(

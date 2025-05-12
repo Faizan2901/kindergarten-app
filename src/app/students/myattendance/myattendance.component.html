@@ -1,6 +1,9 @@
 <div class="attendance-stats">
   <h2 class="title">🎨 Monthly Attendance Summary 📅</h2>
-  <h2 class="student-name">👦📛 Attendance for: {{ studentName }}</h2>
+  <ng-container *ngIf="!isStudent">
+    <h2 class="student-name">👦📛 Attendance for: {{ studentName }}</h2>
+  </ng-container>
+  
   <table class="summary-table">
     <thead>
       <tr>

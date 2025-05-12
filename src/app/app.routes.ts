@@ -19,6 +19,7 @@ import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound/page
 import { AttendanceeditComponent } from './teachers/attendance/attendanceedit/attendanceedit.component';
 import { EditstudentComponent } from './students/editstudent/editstudent/editstudent.component';
 import { MyattendanceComponent } from './students/myattendance/myattendance.component';
+import { MyprofileComponent } from './students/myprofile/myprofile/myprofile.component';
 
 export const routes: Routes = [
     {
@@ -96,6 +97,11 @@ export const routes: Routes = [
     {
         path: 'my-attendance',
         component: MyattendanceComponent,
+        canActivate: [roleGuard(['ADMIN','TEACHER','STUDENT'])]
+    },
+    {
+        path: 'my-profile',
+        component: MyprofileComponent,
         canActivate: [roleGuard(['ADMIN','TEACHER','STUDENT'])]
     },
     {

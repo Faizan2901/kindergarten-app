@@ -28,6 +28,7 @@
 
     @if (isLoggedIn | async) {
       <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
+      <li><a routerLink="/my-profile">My Profile</a></li>
     }
 
     <li class="dropdown desktop-only">
