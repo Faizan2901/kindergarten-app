@@ -1,10 +1,13 @@
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
+import { Announcement } from '../../../dto/announcement.interface';
+import { AnnouncementService } from '../../../services/announcement/announcement.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-announcements',
-  imports: [NgFor,DatePipe,NgIf],
+  imports: [DatePipe,FormsModule,CommonModule],
   templateUrl: './announcements.component.html',
   styleUrl: './announcements.component.scss'
 })
@@ -14,6 +17,12 @@ export class AnnouncementsComponent {
 
   userRole: string[] = [];
 
+  announcementService = inject(AnnouncementService);
+
+  announcements: Announcement[] = [];
+
+  showForm = false;
+
   ngOnInit(): void {
     this.userService.getUserInfo().subscribe();
   
@@ -22,24 +31,65 @@ export class AnnouncementsComponent {
         this.userRole = user.roles.map((role: any) => role.name);
       }
     });
+    this.loadAnnouncements();
   }  
 
-  announcements = [
-    {
-      title: 'Annual Day 🥳',
-      description: 'Our fun-filled annual day is on 24th April.',
-      date: new Date('2025-04-24')
-    },
-    {
-      title: 'Summer Break ☀️',
-      description: 'The school will remain closed from May 1 to June 10 for summer holidays.',
-      date: new Date('2025-06-10')
-    },
-    {
-      title: 'Admission Open 📚',
-      description: 'Admissions are open for next educational 2025-26 year',
-      date: new Date('2025-05-01')
+  loadAnnouncements() {
+    this.announcementService.getAnnouncements().subscribe(
+      (response: Announcement[]) => {
+        this.announcements = response;
+        console.log('Announcements loaded:', this.announcements);
+      },
+      (error) => {
+        console.error('Error loading announcements:', error);
+      }
+    );
+  }
+
+  toggleForm() {
+    this.showForm = !this.showForm;
+  }
+
+  newAnnouncement = {
+    id: '',
+    title: '',
+    description: '',
+    date: ''
+  };
+
+  addAnnouncement() {
+    if(this.newAnnouncement.title && this.newAnnouncement.description && this.newAnnouncement.date) {
+      const newAnn = {
+        ...this.newAnnouncement,
+        date: new Date(this.newAnnouncement.date)
+      };
+      this.announcements.push(newAnn);
+      this.announcementService.addAnnouncement(newAnn).subscribe(
+        (response) => {
+          console.log('New announcement added:', response);
+          this.loadAnnouncements();
+        },
+        (error) => {
+          console.error('Error adding announcement:', error);
+        }
+      );
+      this.newAnnouncement = {id:'', title: '', description: '', date: '' };
+      this.showForm = false;
     }
-  ];
+  }
+
+
+  deleteAnnouncement(note: Announcement): void {
+    this.announcementService.deleteAnnouncement(note.id).subscribe(
+      () => {
+        console.log('Announcement deleted:', note.id);
+        this.loadAnnouncements();
+      },
+      (error) => {
+        console.error('Error deleting announcement:', error);
+      }
+    );
+  }
+  
 
 }

@@ -81,9 +81,54 @@
       transform: scale(1.03);
     }
   }
+
+  .add-form {
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    border: 2px dashed #f48fb1;
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    input, textarea {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+
+      &:focus {
+        border-color: #ec407a;
+        box-shadow: 0 0 5px rgba(236, 64, 122, 0.3);
+      }
+    }
+
+    .submit-btn {
+      background-color: #81c784;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.7rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+
+      &:hover {
+        background-color: #66bb6a;
+      }
+    }
+  }
 }
 
-/* 🎈 Bounce Animation for Emoji */
+/* 🎈 Emoji bounce animation */
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);
@@ -93,7 +138,54 @@
   }
 }
 
-/* ✨ Float In Animation for Title */
+/* ❌ Delete Button Stylish in Top-Right */
+.delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #fff;
+  border: 2px solid #d32f2f;
+  font-size: 1rem;
+  color: #d32f2f;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+  line-height: 1;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #fff;
+    transform: scale(1.15);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(1);
+    background-color: #b71c1c;
+    color: #fff;
+  }
+}
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; // Adjust as needed
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  background-color: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ✨ Float-In Title Animation */
 @keyframes floatIn {
   from {
     transform: translateY(-30px);

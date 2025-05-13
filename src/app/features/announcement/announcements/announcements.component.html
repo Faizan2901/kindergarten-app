@@ -1,8 +1,18 @@
 <div class="announcement-page">
-    <h1 class="announcement-title">📢 Announcements</h1>
-  
+  <h1 class="announcement-title">📢 Announcements</h1>
+
+  @if (announcements.length > 0) 
+  {
     <div class="announcements-container">
       <div class="announcement-card" *ngFor="let note of announcements">
+        
+        <!-- ❌ Delete Button (top-right corner) -->
+        <button class="delete-btn"
+                *ngIf="userRole.includes('ADMIN') || userRole.includes('TEACHER')"
+                (click)="deleteAnnouncement(note)">
+          ❌
+        </button>
+  
         <div class="icon">🎉</div>
         <div class="content">
           <h3>{{ note.title }}</h3>
@@ -11,10 +21,40 @@
         </div>
       </div>
     </div>
-
-    <ng-container *ngIf="userRole.includes('ADMIN') || userRole.includes('TEACHER')">
-      <button class="add-btn" title="Coming soon!">➕ Add Announcement</button>
-    </ng-container>
-    
-  </div>
+    @if ((userRole.includes('ADMIN') || userRole.includes('TEACHER'))) 
+    {
+      <button class="add-btn" (click)="toggleForm()">
+        {{ showForm ? '❌ Cancel' : '➕ Add Announcement' }}
+      </button>
   
+      <div class="add-form" *ngIf="showForm">
+        <input type="text" placeholder="Title" [(ngModel)]="newAnnouncement.title" />
+        <textarea rows="3" placeholder="Description" [(ngModel)]="newAnnouncement.description"></textarea>
+        <input type="date" [(ngModel)]="newAnnouncement.date" />
+        <button class="submit-btn" (click)="addAnnouncement()">✅ Submit</button>
+      </div>
+    }
+  }@else 
+  {
+    @if ((userRole.includes('ADMIN') || userRole.includes('TEACHER'))) 
+    {
+      <button class="add-btn" (click)="toggleForm()">
+        {{ showForm ? '❌ Cancel' : '➕ Add Announcement' }}
+      </button>
+  
+      <div class="add-form" *ngIf="showForm">
+        <input type="text" placeholder="Title" [(ngModel)]="newAnnouncement.title" />
+        <textarea rows="3" placeholder="Description" [(ngModel)]="newAnnouncement.description"></textarea>
+        <input type="date" [(ngModel)]="newAnnouncement.date" />
+        <button class="submit-btn" (click)="addAnnouncement()">✅ Submit</button>
+      </div>
+    }@else 
+    {
+      <div class="no-data-container">
+        <p class="no-data">No announcements available.</p>
+      </div>
+    }
+    
+  }
+  
+</div>
