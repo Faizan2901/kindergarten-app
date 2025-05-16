@@ -20,6 +20,8 @@ import { AttendanceeditComponent } from './teachers/attendance/attendanceedit/at
 import { EditstudentComponent } from './students/editstudent/editstudent/editstudent.component';
 import { MyattendanceComponent } from './students/myattendance/myattendance.component';
 import { MyprofileComponent } from './students/myprofile/myprofile/myprofile.component';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
     {
@@ -103,6 +105,14 @@ export const routes: Routes = [
         path: 'my-profile',
         component: MyprofileComponent,
         canActivate: [roleGuard(['ADMIN','TEACHER','STUDENT'])]
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
     },
     {
         path: '**', 
