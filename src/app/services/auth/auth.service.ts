@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
+import { ForgotPassword, ResetPassword } from '../../dto/forgotpassword.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  sendResetLink(credentials:ForgotPassword): Observable<string> {
+    return this.http.post<any>(`${this.apiUrl}/forgot-password`, credentials );  
+  }
+
+  resetPassword(credentials:ResetPassword): Observable<string> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, credentials );
   }
 
 }

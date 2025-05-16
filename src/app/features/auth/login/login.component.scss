@@ -63,19 +63,21 @@
     background-color: #ffd54f;
   }
   
-  .register-link {
-    margin-top: 1rem;
-    color: #6d4c41;
+.auth-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  color: #6d4c41;
+  font-size: 0.95rem;
+}
 
-    a {
-        color: #ff6f00;
-        font-weight: bold;
-        text-decoration: none;
-    
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+.auth-links a {
+  color: #ff6f00;
+  font-weight: bold;
+  text-decoration: none;
+}
 
-  }
-  
+.auth-links a:hover {
+  text-decoration: underline;
+}

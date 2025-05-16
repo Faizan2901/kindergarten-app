@@ -1,35 +1,40 @@
 <div class="login-container">
-    <div class="login-box">
-      <h2>Welcome Back 👋</h2>
-      <p>Login to continue your journey at <strong>Nanhe Munne Play Center</strong></p>
-  
-      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-        <div class="form-group">
-          <label>Play Center Id</label>
-          <input
-            type="text"
-            [(ngModel)]="playCenterId"
-            name="playCenterId"
-            required
-            placeholder="Enter your Id e.g. NMPC..."
-          />
-        </div>
-  
-        <div class="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            required
-            placeholder="Enter your password"
-          />
-        </div>
-  
-        <button type="submit" [disabled]="!loginForm.form.valid">Login 🚀</button>
-      </form>
-  
-      <p class="register-link">Don't have an account? <a routerLink="/register">Register here 💫</a></p>
+  <div class="login-box">
+    <h2>Welcome Back 👋</h2>
+    <p>Login to continue your journey at <strong>Nanhe Munne Play Center</strong></p>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="form-group">
+        <label>Play Center Id</label>
+        <input
+          type="text"
+          [(ngModel)]="playCenterId"
+          name="playCenterId"
+          required
+          placeholder="Enter your Id e.g. NMPC..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.form.valid">Login 🚀</button>
+    </form>
+
+    <div class="auth-links">
+      <a routerLink="/forgot-password">Forgot Password? 🔐</a>
+      <span>|</span>
+      <a routerLink="/register">Register here 💫</a>
     </div>
+
+
   </div>
-  
+</div>
