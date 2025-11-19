@@ -80,7 +80,6 @@ export class AttendanceComponent implements OnInit {
     this.selectedDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
 
     const attendanceData : Attendance[]= this.students.map(student => ({
-      firstName: student.firstName,
       playCenterId: student.playCenterId,
       date: this.selectedDate,
       present: student.status 

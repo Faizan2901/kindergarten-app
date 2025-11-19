@@ -66,7 +66,7 @@ export class RegisterComponent {
     
     this.authService.register(formData).subscribe({
       next: (response) => {
-        alert(response.message);
+        // alert(response.message);
         form.resetForm();
         this.photoSelected = false;
         this.formSubmitted = false;

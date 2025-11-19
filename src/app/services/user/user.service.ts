@@ -10,7 +10,7 @@ import { Attendance } from '../../dto/attendance.interface';
 export class UserService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/user';
+  private apiUrl = 'http://localhost:8090/api/student';
 
   // Create a BehaviorSubject to hold the user info and roles
   private currentUserSubject = new BehaviorSubject<Student | null>(null);
@@ -19,7 +19,7 @@ export class UserService {
   constructor() {}
 
   getUserInfo(): Observable<Student> {
-    return this.http.get<{ user: Student }>(`${this.apiUrl}`).pipe(
+    return this.http.get<{ user: Student }>(`${this.apiUrl}`,{withCredentials: true}).pipe(
       tap(res => {
         this.currentUserSubject.next(res.user); // Now res.user is typed correctly
       }),
@@ -34,7 +34,7 @@ export class UserService {
   }
   
   getAllStudents():Observable<{students:Student[]}>{
-    return this.http.get<{students:Student[]}>(`${this.apiUrl}/students`);
+    return this.http.get<{students:Student[]}>(`${this.apiUrl}/students`,{withCredentials: true});
   }
 
   updateStudent(playCenterId: string, formData: FormData): Observable<string> {

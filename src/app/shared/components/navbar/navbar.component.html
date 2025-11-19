@@ -1,14 +1,16 @@
 <nav class="navbar">
   <a class="logo" routerLink="/">
-    <span class="emoji">🌈</span><span class="text">Nanhe Munne Play Center</span>
+    <span class="emoji">🌈</span>
+    <span class="text">Nanhe Munne Play Center</span>
   </a>
 
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
 
   <ul class="nav-links" [class.active]="menuOpen" (click)="handleMenuClick($event)">
+    
     <li><a routerLink="/">Home</a></li>
 
-    @if (isLoggedIn | async) {
+    @if (isLoggedIn()) {
       <li><a routerLink="/dashboard">Dashboard</a></li>
     }
 
@@ -20,13 +22,12 @@
     <li class="mobile-only"><a routerLink="/gallery">Gallery</a></li>
     <li class="mobile-only"><a routerLink="/contact">Contact</a></li>
 
-
-    @if (!(isLoggedIn | async)) {
+    @if (!isLoggedIn()) {
       <li><a routerLink="/login">Login</a></li>
       <li><a routerLink="/register">Register</a></li>
     }
 
-    @if (isLoggedIn | async) {
+    @if (isLoggedIn()) {
       <li><a href="#" (click)="logout(); $event.preventDefault()">Logout</a></li>
       <li><a routerLink="/my-profile">My Profile</a></li>
     }

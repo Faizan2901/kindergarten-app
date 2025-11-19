@@ -1,16 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, AsyncPipe],
+  imports: [RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+
+
+  ngOnInit() {
+  console.log("Signal value =", this.isLoggedIn());
+}
+
 
   authService = inject(AuthService);
   router = inject(Router);
@@ -21,9 +25,11 @@ export class NavbarComponent {
     this.menuOpen = !this.menuOpen;
   }
 
-  isLoggedIn = this.authService.isLoggedIn$;
+  // 🔥 Signal-based auth state
+  isLoggedIn = this.authService.loggedIn;
 
   logout() {
+    console.log('Logging out...');
     this.authService.logout();
     this.router.navigate(['/login']);
   }
@@ -34,5 +40,4 @@ export class NavbarComponent {
       this.menuOpen = false;
     }
   }
-
 }

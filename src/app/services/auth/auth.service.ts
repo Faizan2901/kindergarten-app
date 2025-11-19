@@ -1,51 +1,59 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { UserService } from '../user/user.service';
+import { inject, Injectable, signal } from '@angular/core';
 import { ForgotPassword, ResetPassword } from '../../dto/forgotpassword.interface';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginResponse } from '../../dto/LoginResponse.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/auth';
-  http = inject(HttpClient);
-  userService=inject(UserService);
+  private apiUrl = 'http://localhost:8090/api/auth';
+  private http = inject(HttpClient);
+  private cookieService = inject(CookieService);
 
-  private loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
-  isLoggedIn$ = this.loggedIn.asObservable();
+  // 🔥 Writable signal (we control this only)
+  loggedIn = signal(false);
 
-  register(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, user);
+  constructor() {
+    // App load → check cookie & update signal
+    this.refreshLoginState();
   }
 
-  login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials);
+  // 🔥 Refresh cookie state → signal ko update karo
+  refreshLoginState() {
+    const isLogged = this.cookieService.check('PASSID');
+    this.loggedIn.set(isLogged);
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
-    this.loggedIn.next(true); // Trigger update
+  register(user: any) {
+    return this.http.post(`${this.apiUrl}/register`, user);
+  }
+
+  login(credentials: any) {
+    return this.http.post<LoginResponse>(
+      `${this.apiUrl}/login`,
+      credentials,
+      { withCredentials: true }
+    );
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.loggedIn.next(false); // Trigger update
-    this.userService.clearUserInfo();
-    
+    this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe();
+    this.cookieService.deleteAll('/');
+    this.loggedIn.set(false);     // UI update
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return this.cookieService.check('PASSID');
   }
 
-  sendResetLink(credentials:ForgotPassword): Observable<string> {
-    return this.http.post<any>(`${this.apiUrl}/forgot-password`, credentials );  
+  sendResetLink(credentials: ForgotPassword) {
+    return this.http.post(`${this.apiUrl}/forgot-password`, credentials);
   }
 
-  resetPassword(credentials:ResetPassword): Observable<string> {
-    return this.http.post<any>(`${this.apiUrl}/reset-password`, credentials );
+  resetPassword(credentials: ResetPassword) {
+    return this.http.post(`${this.apiUrl}/reset-password`, credentials);
   }
-
 }

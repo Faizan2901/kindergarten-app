@@ -1,55 +1,41 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { catchError, map, switchMap, take } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../services/auth/auth.service';
-import { UserService } from '../../services/user/user.service';
 
 export function roleGuard(allowedRoles: string[]): CanActivateFn {
-  return (route, state) => {
+  return () => {
     const authService = inject(AuthService);
-    const userService = inject(UserService);
+    const cookieService = inject(CookieService);
     const router = inject(Router);
 
+    // 1️⃣ Authentication check
     if (!authService.isAuthenticated()) {
-      alert('Please login first!');
+      alert("Please login first!");
       router.navigate(['/login']);
-      return of(false);
+      return false;
     }
 
-    return userService.currentUser$.pipe(
-      take(1),
-      switchMap((user: any) => {
-        if (user) {
-          return of(user);
-        } else {
-          return userService.getUserInfo().pipe(
-            catchError(err => {
-              console.error('❌ Error loading user info in guard:', err);
-              router.navigate(['/login']);
-              return of(null);
-            })
-          );
-        }
-      }),
-      map((user: any) => {
-        if (!user) {
-          alert('User info not loaded!');
-          router.navigate(['/login']);
-          return false;
-        }
+    // 2️⃣ Read roles from cookie
+    const raw = cookieService.get('PASSID');
+    let userRoles: string[] = [];
 
-        const roles = user.roles?.map((role: any) => role.name) ?? [];
-        const hasAccess = roles.some((role: string) => allowedRoles.includes(role));
+    if (raw) {
+      const decoded = atob(raw);
+      userRoles = JSON.parse(decoded);
+    }
+    
+    console.log("User roles:", userRoles);
 
-        if (!hasAccess) {
-          alert('Access Denied!');
-          router.navigate(['/']);
-          return false;
-        }
+    // 3️⃣ Check if user has one of the allowed roles
+    const hasAccess = userRoles.some(role => allowedRoles.includes(role));
 
-        return true;
-      })
-    );
+    if (!hasAccess) {
+      alert("Access Denied!");
+      router.navigate(['/']);
+      return false;
+    }
+
+    return true;
   };
 }

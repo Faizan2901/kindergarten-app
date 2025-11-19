@@ -22,14 +22,14 @@ export class MyprofileComponent implements OnInit {
   roles: string[] = [];
 
   ngOnInit(): void {
-    this.userService.currentUser$.pipe(take(1)).subscribe(user => {
-      if (user) {
-        this.user = user;
-        this.roles = user.roles?.map((role: any) => role.name) ?? []
-        this.age=this.calculateAge(user.dateOfBirth);
-        console.log('User:', this.user);
-      }
-    });
+    // this.userService.currentUser$.pipe(take(1)).subscribe(user => {
+    //   if (user) {
+    //     this.user = user;
+    //     this.roles = user.roles?.map((role: any) => role.name) ?? []
+    //     this.age=this.calculateAge(user.dateOfBirth);
+    //     console.log('User:', this.user);
+    //   }
+    // });
   }
 
   calculateAge(dateOfBirth: string): number {

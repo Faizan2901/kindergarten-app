@@ -25,7 +25,8 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         alert(response.message);
-        this.authService.saveToken(response.token);  // <--- important!
+        // this.authService.saveToken(response.token);  // <--- important!
+        this.authService.refreshLoginState();  // UI update
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
