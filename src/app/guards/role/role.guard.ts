@@ -26,6 +26,7 @@ export function roleGuard(allowedRoles: string[]): CanActivateFn {
     }
     
     console.log("User roles:", userRoles);
+    console.log("Allowed roles:", allowedRoles);
 
     // 3️⃣ Check if user has one of the allowed roles
     const hasAccess = userRoles.some(role => allowedRoles.includes(role));

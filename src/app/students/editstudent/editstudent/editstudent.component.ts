@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-editstudent',
@@ -13,7 +14,7 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class EditstudentComponent {
 
-  userService=inject(UserService);
+  authService =inject(AuthService);
   
   
   student: Student = {
@@ -66,7 +67,7 @@ export class EditstudentComponent {
     formData.append('address', this.student.address);
 
 
-    this.userService.updateStudent(this.student.playCenterId, formData).subscribe({
+    this.authService.updateStudent(this.student.playCenterId, formData).subscribe({
       next: (res) => {
         alert('Student updated successfully');
         this.router.navigate(['/manage-students']);

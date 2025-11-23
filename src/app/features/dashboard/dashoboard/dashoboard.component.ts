@@ -3,7 +3,7 @@ import { UserService } from '../../../services/user/user.service';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { DashboardService } from '../../../services/dashboard/dashboard.service';
+// import { DashboardService } from '../../../services/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-dashoboard',
@@ -14,7 +14,7 @@ import { DashboardService } from '../../../services/dashboard/dashboard.service'
 export class DashoboardComponent implements OnInit{
 
   userService = inject(UserService);
-  dashBoardService=inject(DashboardService);
+  // dashBoardService=inject(DashboardService);
 
   user: any = {};
   userRole: string[] = [];

@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { ForgotPassword, ResetPassword } from '../../dto/forgotpassword.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginResponse } from '../../dto/LoginResponse.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,11 @@ export class AuthService {
   }
 
   login(credentials: any) {
+    console.log('AuthService Login Credentials:', credentials);
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
       credentials,
-      { withCredentials: true }
+      { withCredentials: true },
     );
   }
 
@@ -56,4 +58,9 @@ export class AuthService {
   resetPassword(credentials: ResetPassword) {
     return this.http.post(`${this.apiUrl}/reset-password`, credentials);
   }
+
+  updateStudent(playCenterId: string, formData: FormData): Observable<string> {
+    return this.http.put(`${this.apiUrl}/students/${playCenterId}`, formData, { responseType: 'text' ,withCredentials: true});
+  }
+
 }

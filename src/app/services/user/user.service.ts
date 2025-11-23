@@ -37,9 +37,7 @@ export class UserService {
     return this.http.get<{students:Student[]}>(`${this.apiUrl}/students`,{withCredentials: true});
   }
 
-  updateStudent(playCenterId: string, formData: FormData): Observable<string> {
-    return this.http.put(`${this.apiUrl}/students/${playCenterId}`, formData, { responseType: 'text' });
-  }
+  
 
   
 }
