@@ -52,11 +52,11 @@ export class RegisterComponent {
     const formData = new FormData();
     formData.append('firstName', this.registerData.firstName);
     formData.append('email', this.registerData.email);
-    formData.append('dob', this.registerData.dob);
+    formData.append('dateOfBirth', this.registerData.dob);
     formData.append('gender', this.registerData.gender);
-    formData.append('parentFatherName', this.registerData.parentFatherName);
-    formData.append('parentMotherName', this.registerData.parentMotherName);
-    formData.append('parentContact', this.registerData.parentContact);
+    formData.append('fatherName', this.registerData.parentFatherName);
+    formData.append('motherName', this.registerData.parentMotherName);
+    formData.append('contactNumber', this.registerData.parentContact);
     formData.append('emergencyContact', this.registerData.emergencyContact);
     formData.append('address', this.registerData.address);
     formData.append('password', this.registerData.password);
@@ -70,6 +70,7 @@ export class RegisterComponent {
         form.resetForm();
         this.photoSelected = false;
         this.formSubmitted = false;
+        alert('Registration successful! Please login.');
         this.router.navigate(['/login']);
       },
       error: (err) => {

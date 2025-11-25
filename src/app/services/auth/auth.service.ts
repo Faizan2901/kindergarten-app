@@ -37,7 +37,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
       credentials,
-      { withCredentials: true },
+      { withCredentials: true }
     );
   }
 
