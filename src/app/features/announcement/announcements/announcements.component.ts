@@ -1,9 +1,10 @@
 import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { Announcement } from '../../../dto/announcement.interface';
 import { AnnouncementService } from '../../../services/announcement/announcement.service';
 import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-announcements',
@@ -11,26 +12,25 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './announcements.component.html',
   styleUrl: './announcements.component.scss'
 })
-export class AnnouncementsComponent {
+export class AnnouncementsComponent  implements  OnInit{
 
-  userService = inject(UserService);
+  announcementService = inject(AnnouncementService);
+  cookieService = inject(CookieService);
 
   userRole: string[] = [];
 
-  announcementService = inject(AnnouncementService);
+
 
   announcements: Announcement[] = [];
 
   showForm = false;
 
   ngOnInit(): void {
-    this.userService.getUserInfo().subscribe();
-  
-    this.userService.currentUser$.subscribe(user => {
-      if (user && user.roles) {
-        this.userRole = user.roles.map((role: any) => role.name);
-      }
-    });
+    const raw = this.cookieService.get('PASSID');
+    if (raw) {
+      const decoded = atob(raw);
+      this.userRole = JSON.parse(decoded);
+    }
     this.loadAnnouncements();
   }  
 

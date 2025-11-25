@@ -10,18 +10,18 @@ export class AnnouncementService {
 
   http=inject(HttpClient);
 
-  private baseUrl = 'http://localhost:8080/api/announcement';
+  private baseUrl = 'http://localhost:8090/api/announcement';
 
   getAnnouncements():Observable<Announcement[]> {
-    return this.http.get<Announcement[]>(`${this.baseUrl}`);
+    return this.http.get<Announcement[]>(`${this.baseUrl}`,{withCredentials:true});
   }
 
   addAnnouncement (announcement: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(`${this.baseUrl}`, announcement);
+    return this.http.post<Announcement>(`${this.baseUrl}`, announcement,{withCredentials:true});
   }
 
   deleteAnnouncement(id: string){
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`,{withCredentials:true});
   } 
 
 }

@@ -28,6 +28,9 @@ export class ManagestudentComponent implements OnInit{
         this.students = res.students.filter((student: Student) => {
           return student.playCenterId.includes("STUDENT");
         }) 
+        this.students.forEach(student => {
+          console.log('Student Photo link:', student.photoUrl);
+        });
       },
       error: (err) => {
         console.error('Error fetching students:', err);
